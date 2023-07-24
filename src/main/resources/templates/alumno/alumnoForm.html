@@ -1,0 +1,41 @@
+<html>
+
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+
+    <H2>Datos de Alumno</H2>
+    <form class th:object="${alumno}" th:action="@{/alumnos/guardar}" method="post">
+
+        <div th:replace="~{_frag/inputs::iHtml(hidden, 'ID:', ' ', id)}"></div>
+
+        <div th:replace="~{_frag/inputs::iHtml(text, 
+			'Apellidos:', 'Ingrese Apellidos', apellidos)}"></div>
+
+        <div th:replace="~{_frag/inputs::iHtml(text, 
+			'Nombres:', 'Ingrese Nombres', nombres)}"></div>
+
+        <div th:replace="~{_frag/inputs::iHtml(text, 
+			'DNI:', 'Ingrese DNI', dni)}"></div>
+
+        <div th:replace="~{_frag/inputs::iHtml(date, 
+			'Fecha Nacimiento:', '', fechaNacimiento)}"></div>
+
+        <div th:replace="~{_frag/inputs::iHtml(text, 
+			'Celular:', 'Ingrese Celular', celular)}"></div>
+
+        <div th:replace="~{_frag/inputs::iHtml(email, 
+			'eMail:', 'Ingrese eMail', EMail)}"></div>
+
+        <div th:replace="~{_frag/inputs::iHtml(text, 
+			'Dirección:', 'Ingrese Dirección', direccion)}"></div>
+
+        <div>
+            <block th:replace="~{_frag/inputs::btn_aceptar}"></block>
+            <block th:replace="~{_frag/inputs::btn_cancelar(@{/alumnos/listar})}"></block>
+        </div>
+    </form>
+</body>
+
+</html>
