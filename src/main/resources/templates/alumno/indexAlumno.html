@@ -4,32 +4,37 @@
   <header th:replace="~{_frag/Base::site-header}"></header>
   <div class="container">
     <h1>Listado de Alumnos</h1>
-    <table class="table table-striped table-bordered table-hover">
-      <thead class="table-dark">
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Fecha Nacimiento</th>
-        <th>Celular</th>
-        <th>Correo</th>
-        <th>Direccion</th>
-        <th>Editar</th>
-      </thead>
-      <tbody>
-        <tr th:each="alumno : ${alumnos}">
-          <td th:text="${alumno.id}">ID</td>
-          <td th:text="${alumno.nombres}">NOMBRE</td>
-          <td th:text="${alumno.apellidos}">APELIDO</td>
-          <td th:text="${#calendars.format(alumno.fechaNacimiento, 'dd/MM/yyyy')}">NACIMIENTO</td>
-          <td th:text="${alumno.celular}">CELULAR</td>
-          <td th:text="${alumno.eMail}">CORREO</td>
-          <td th:text="${alumno.direccion}">DIRECCION</td>
-          <td>
-            <th:block th:replace="~{_frag/inputs::btn_editar(@{/alumnos/editar/}+${alumno.id})}" </th:block>
-          </td>
-
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Fecha Nacimiento</th>
+          <th>Celular</th>
+          <th>Correo</th>
+          <th>Direccion</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </thead>
+        <tbody>
+          <tr th:each="alumno : ${alumnos}">
+            <td th:text="${alumno.id}">ID</td>
+            <td th:text="${alumno.nombres}">NOMBRE</td>
+            <td th:text="${alumno.apellidos}">APELIDO</td>
+            <td th:text="${#calendars.format(alumno.fechaNacimiento, 'yyyy/MM/dd')}">NACIMIENTO</td>
+            <td th:text="${alumno.celular}">CELULAR</td>
+            <td th:text="${alumno.eMail}">CORREO</td>
+            <td th:text="${alumno.direccion}">DIRECCION</td>
+            <td>
+              <th:block th:replace="~{_frag/inputs::btn_editar(@{/alumnos/editar/}+${alumno.id})}" </th:block>
+            </td>
+            <td>
+              <th:block th:replace="~{_frag/inputs::btn_eliminar(@{/alumnos/eliminar/}+${alumno.id})}" </th:block>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </body>

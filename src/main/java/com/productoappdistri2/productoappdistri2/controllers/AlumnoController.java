@@ -22,7 +22,7 @@ public class AlumnoController {
     @Autowired
     private AlumnoService service;
 
-    @GetMapping({ "/listar", "/" })
+    @GetMapping(path = { "/listar", "/" })
     public String listarAlumnos(Model model) {
         model.addAttribute("alumnos", service.findAll());
         return "alumno/indexAlumno";
@@ -57,7 +57,7 @@ public class AlumnoController {
         else
             service.update(alumno);
 
-        return "redirect:alumno/indexAlumno";
+        return "redirect:/alumnos/listar";
     }
 
     @GetMapping("/eliminar/{id}")
@@ -65,6 +65,6 @@ public class AlumnoController {
             @PathVariable("id") Long idAlumno) {
 
         service.delete(idAlumno);
-        return "redirect:alumno/indexAlumno";
+        return "redirect:/alumnos/listar";
     }
 }
