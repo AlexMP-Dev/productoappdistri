@@ -14,18 +14,18 @@ import lombok.Data;
 @Entity
 @Table(name = "docentes")
 public class Docente {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "nombres")
     @NotBlank(message = "Los nombres son requeridos")
-    private String nombre;
+    private String nombres;
 
     @Column(name = "apellidos")
     @NotBlank(message = "Los apellidos son requeridos")
-    private String apellido;
+    private String apellidos;
 
     @Column(name = "dni")
     @NotBlank(message = "El DNI es requerido")
@@ -33,16 +33,14 @@ public class Docente {
 
     @Column(name = "telefono")
     @NotBlank(message = "El telefono es requerido")
-    private String telefono;
+    private String celular;
 
     @Column(name = "email")
     @Email(message = "Email invalido")
-    private String email;
+    private String eMail;
 
     @Column(name = "direccion")
     @NotBlank(message = "La direccion es requerida")
     private String direccion;
-
-    
 
 }

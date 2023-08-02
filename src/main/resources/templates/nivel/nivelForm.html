@@ -1,0 +1,18 @@
+<html>
+
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <div class="container">
+        <h2>Formulario de Niveles</h2>
+        <form th:object="${nivel}" th:action="@{/niveles/guardar}" method="post">
+            <div th:replace="~{_frag/inputs::iHtml(hidden, 'ID:', ' ', id)}"></div>
+            <div th:replace="~{_frag/inputs::iHtml(text, 'Nombre:', 'Ingrese Nombre', nombre)}"></div>
+            <block th:replace="~{_frag/inputs::btn_aceptar}"></block>
+            <block th:replace="~{_frag/inputs::btn_cancelar(@{/alumnos/listar})}"></block>
+        </form>
+    </div>
+</body>
+
+</html>

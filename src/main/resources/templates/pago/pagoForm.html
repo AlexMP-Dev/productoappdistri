@@ -1,0 +1,30 @@
+<html>
+
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <div class="container">
+        <h1>Formulario de Pagos</h1>
+        <form th:object="${pago}" th:action="@{/pagos/guardar}" method="post">
+            <div th:replace="~{_frag/inputs::iHtml(hidden, 'ID:', ' ', id)}"></div>
+            <div th:replace="~{_frag/inputs::iHtml(date, 'Fecha de Pago:', 'Ingrese Fecha de Pago', fechaPago)}"></div>
+            <div th:replace="~{_frag/inputs::iHtml(text, 'Monto:', 'Ingrese Monto', monto)}"></div>
+            <div th:replace="~{_frag/inputs::iHtml(text, 'Codigo de Pago:', 'Ingrese Codigo de Pago', codigoPago)}">
+            </div>
+            <div>
+                <label for="alumno">Alumno</label>
+                <select th:field="*{alumno}" id="alumno">
+                    <option value="">Selecciona un Alumno</option>
+                    <option th:each="alumno : ${alumnos}" th:value="${alumno.id}"
+                        th:text="${alumno.nombres}+' '+${alumno.apellidos}"></option>
+                </select>
+            </div>
+            <div th:replace="~{_frag/inputs::btn_aceptar}"></div>
+            <div th:replace="~{_frag/inputs::btn_cancelar(@{/pagos/listar})}"></div>
+
+        </form>
+    </div>
+</body>
+
+</html>

@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -16,18 +16,15 @@ import lombok.Data;
 @Entity
 @Table(name = "cursos")
 public class Curso {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "nombre")
     private String nombre;
-    
-    @JoinColumn(name = "id_nivel",
-            referencedColumnName = "id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "FK_curso_nivel"))
-    @OneToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "id_nivel", referencedColumnName = "id", nullable = false, unique = false, foreignKey = @ForeignKey(name = "FK_curso_nivel"))
+    @ManyToOne(fetch = FetchType.LAZY)
     private Nivel nivel;
 }

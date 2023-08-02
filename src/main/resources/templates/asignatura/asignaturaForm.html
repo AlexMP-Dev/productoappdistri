@@ -1,0 +1,35 @@
+<html>
+
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <div class="container">
+        <h2>Formulario de Asignaturas</h2>
+        <form th:object="${asignatura}" th:action="@{/asignaturas/guardar}" method="post">
+            <div th:replace="~{_frag/inputs::iHtml(hidden, 'ID:', ' ', id)}"></div>
+            <div>
+                <label for="docente">Docente</label>
+                <select th:field="*{docente}" id="docente">
+                    <option value="">Selecciona un docente</option>
+                    <option th:each="docente : ${docentes}" th:value="${docente.id}"
+                        th:text="${docente.nombres}+' '+${docente.apellidos}">
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label for="curso">Curso</label>
+                <select th:field="*{curso}" id="curso">
+                    <option value="">Selecciona un curso</option>
+                    <option th:each="curso : ${cursos}" th:value="${curso.id}"
+                        th:text="${curso.nombre}+' '+${curso.nivel.nombre}"></option>
+                </select>
+            </div>
+            <div>
+                <block th:replace="~{_frag/inputs::btn_aceptar}"></block>
+                <block th:replace="~{_frag/inputs::btn_cancelar(@{/asignaturas/listar})}"></block>
+            </div>
+        </form>
+    </div>
+
+</html>

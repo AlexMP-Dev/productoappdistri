@@ -1,3 +1,6 @@
+<!--
+    input por defecto
+-->
 <div th:fragment="iHtml(tipo, label, ph, campo)" class="form-group mb-3">
     <label th:if="${tipo != 'hidden'}" th:for="${'input' + campo}" th:text="${label}" class="form-label">
         Etiqueta</label>
@@ -15,6 +18,38 @@
         <small th:error="*{__${campo}__}">Error!</small>
     </div>
 </div>
+
+<!--
+    input pora dropdawns
+-->
+<div th:fragment="iHtml2(tipo, label, ph, campo, opciones)" class="form-group mb-3">
+    <label th:if="${tipo != 'hidden'}" th:for="${'input' + campo}" th:text="${label}" class="form-label">
+        Etiqueta</label>
+
+    <select th:id="${'input' + campo}" th:field="*{__${campo}__}" th:class="${#fields.hasErrors('*')} 
+        ? (${#fields.hasErrors('__${campo}__')} 
+        ? 'form-select is-invalid'
+        : 'form-select is-valid') : 'form-select'">
+
+        <option value="">Seleccionar una opción</option> <!-- Opción por defecto si no hay selección -->
+
+        <!-- Iterar sobre las opciones y crear una opción para cada una -->
+        <option th:each="opcion : ${opciones}" th:value="${opcion.id}" th:text="${opcion.nombre}"
+            th:selected="${opcion == __${campo}__}">
+            Opción</option>
+    </select>
+
+    <div th:if="${tipo != 'hidden'}" class="valid-feedback">
+        <small>Correcto!</small>
+    </div>
+    <div th:if="${tipo != 'hidden'}" class="invalid-feedback">
+        <small th:error="*{__${campo}__}">Error!</small>
+    </div>
+</div>
+
+<!--
+    input pora botones
+-->
 
 <th:block th:fragment="btn_agregar(ruta, texto)">
     <a th:href="${ruta}" class="btn btn-outline-secondary" th:text="${texto}"></a>

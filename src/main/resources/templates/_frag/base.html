@@ -16,7 +16,7 @@
 	<nav class="navbar navbar-expand-lg " data-bs-theme="dark" style="background-color: rgb(13,155,145);">
 		<div class="container-fluid">
 			<a class="navbar-brand" th:href="@{/}">
-				<img th:src="@{/images/icono-app.png}" width="25" height="25" class="d-inline-block align-text-top">
+				<img th:src="@{/images/icono-app.png}" width="65" height="25" class="d-inline-block align-text-top">
 				Sistema de Control Academico
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -26,20 +26,57 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<a class="nav-item nav-link" th:href="@{/}">Home</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							Listado
+						</a>
+						<ul class="dropdown-menu" data-bs-theme="ligth">
+							<li><a class="dropdown-item" th:href="@{/alumnos/listar}">
+									Lista de Alumnos</a></li>
+							<li><a class="dropdown-item" th:href="@{/asignaturas/listar}">
+									Lista de Asignaturas</a></li>
+							<li><a class="dropdown-item" th:href="@{/docentes/listar}">
+									Lista de Docentes</a></li>
+							<li><a class="dropdown-item" th:href="@{/cursos/listar}">
+									Lista de Cursos</a></li>
+							<li><a class="dropdown-item" th:href="@{/notas/listar}">
+									Lista de Notas</a></li>
+							<li><a class="dropdown-item" th:href="@{/niveles/listar}">
+									Lista de Niveles</a></li>
+							<li><a class="dropdown-item" th:href="@{/periodos/listar}">
+									Lista de periodos</a></li>
+							<li><a class="dropdown-item" th:href="@{/pagos/listar}">
+									Lista de Pagos</a></li>
+							<li><a class="dropdown-item" th:href="@{/matriculas/listar}">
+									Lista de Matriculas</a></li>
+						</ul>
+					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
 							aria-expanded="false">
 							Procesos
 						</a>
 						<ul class="dropdown-menu" data-bs-theme="ligth">
-							<li><a class="dropdown-item" th:href="@{/docente/index}">
-									Registrar Docente</a></li>
-							<li><a class="dropdown-item" th:href="@{/curso/index}">
-									Registrar Curso</a></li_>
+							<li><a class="dropdown-item" th:href="@{/docentes/nuevo}">
+									Registrar Docentes</a></li>
+							<li><a class="dropdown-item" th:href="@{/cursos/nuevo}">
+									Registrar Cursos</a></li>
 							<li><a class="dropdown-item" th:href="@{/alumnos/nuevo}">
-									Registrar Alumno</a></li>
-							<li><a class="dropdown-item" th:href="@{/nota/index}">
+									Registrar Alumnos</a></li>
+							<li><a class="dropdown-item" th:href="@{/notas/nuevo}">
 									Registrar Notas</a></li>
+							<li><a class="dropdown-item" th:href="@{/asignaturas/nuevo}">
+									Registrar Asignaturas</a></li>
+							<li><a class="dropdown-item" th:href="@{/niveles/nuevo}">
+									Registrar Niveles</a></li>
+							<li><a class="dropdown-item" th:href="@{/periodos/nuevo}">
+									Registrar periodos</a></li>
+							<li><a class="dropdown-item" th:href="@{/pagos/nuevo}">
+									Registrar Pagos</a></li>
+							<li><a class="dropdown-item" th:href="@{/matriculas/nuevo}">
+									Registrar Matriculas</a></li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
@@ -52,14 +89,14 @@
 							Reportes
 						</a>
 						<ul class="dropdown-menu" data-bs-theme="ligth">
-							<li><a class="dropdown-item" th:href="@{/nota/matriculados}">
+							<li><a class="dropdown-item" th:href="@{/notas/matriculados}">
 									Reporte de Matriculados</a></li>
-							<li><a class="dropdown-item" th:href="@{/nota/boleta}">
+							<li><a class="dropdown-item" th:href="@{/notas/boleta}">
 									Boleta de Notas</a></li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
-							<li><a class="dropdown-item" th:href="@{/nota/cuadromeritos}">
+							<li><a class="dropdown-item" th:href="@{/notas/cuadromeritos}">
 									Cuadro de Meritos</a></li>
 						</ul>
 					</li>

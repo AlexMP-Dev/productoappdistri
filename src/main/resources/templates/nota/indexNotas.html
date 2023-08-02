@@ -1,0 +1,45 @@
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+  <header th:replace="~{_frag/Base::site-header}"></header>
+  <div class="container">
+    <h1>Listado de Notas</h1>
+    <div class="mb-3">
+      <th:block th:replace="~{_frag/inputs::btn_agregar(@{/notas/nuevo},'Agregar Nota')}" </th:block></th:block>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+          <th>ID</th>
+
+          <th>Nombre Curso</th>
+          <th>Nota Speaking</th>
+          <th>Nota Earing</th>
+          <th>Nota Writing</th>
+
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </thead>
+        <tbody>
+          <tr th:each="nota : ${notas}">
+            <td th:text="${nota.id}">ID</td>
+
+            <td th:text="${nota.matricula.curso.nombre}+' '+${nota.matricula.curso.nivel.nombre}">Nombre Curso</td>
+            <td th:text="${nota.notaSpeaking}">Nota Speaking</td>
+            <td th:text="${nota.notaEaring}">Nota Earing</td>
+            <td th:text="${nota.notaWriting}">Nota Writing</td>
+            <td>
+              <th:block th:replace="~{_frag/inputs::btn_editar(@{/notas/editar/}+${nota.id})}" />
+            </td>
+            <td>
+              <th:block th:replace="~{_frag/inputs::btn_eliminar(@{/notas/eliminar/}+${nota.id})}" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <a th:href="@{/notas/nueva}">Agregar Nueva Nota</a>
+    </div>
+  </div>
+</body>

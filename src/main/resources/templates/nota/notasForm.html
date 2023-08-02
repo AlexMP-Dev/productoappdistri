@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+  <header th:replace="~{_frag/Base::site-header}"></header>
+  <div class="container">
+    <h2>Formulario de Nota</h2>
+    <form th:object="${nota}" th:action="@{/notas/guardar}" method="post">
+      <div th:replace="~{_frag/inputs::iHtml(hidden, 'ID:', ' ', id)}"></div>
+      <div th:replace="~{_frag/inputs::iHtml(hidden, 'Matricula:', ' ', matricula)}"></div>
+      <div th:replace="~{_frag/inputs::iHtml(number, 'Nota Speaking:', 'Ingresa la Nota', notaSpeaking)}"></div>
+      <div th:replace="~{_frag/inputs::iHtml(number, 'Nota Earing:', 'Ingresa la Nota', notaEaring)}"></div>
+      <div th:replace="~{_frag/inputs::iHtml(number, 'Nota Writing:', 'Ingresa la Nota', notaWriting)}"></div>
+      <div>
+        <button type="submit">Guardar</button>
+        <a th:href="@{/notas/listar}">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

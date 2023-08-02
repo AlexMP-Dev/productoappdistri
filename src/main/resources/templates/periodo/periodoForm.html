@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+  <header th:replace="~{_frag/Base::site-header}"></header>
+  <div class="container">
+    <h2>Formulario de Período</h2>
+    <form th:object="${periodo}" th:action="@{/periodos/guardar}" method="post">
+
+      <div th:replace="~{_frag/inputs::iHtml(hidden, 'ID:', ' ', id)}"></div>
+
+      <div>
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" placeholder="Ingrese el nombre del período" />
+      </div>
+
+      <div>
+        <label>Fecha de Inicio:</label>
+        <input type="date" th:field="*{fechaInicio}" />
+      </div>
+
+      <div>
+        <label>Fecha de Fin:</label>
+        <input type="date" th:field="*{fechaFin}" />
+      </div>
+
+      <div>
+        <label>Estado:</label>
+        <select th:field="*{estado}">
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+
+      <div>
+        <button type="submit">Guardar</button>
+        <a th:href="@{/periodos/listar}">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

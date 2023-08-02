@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Past;
 import lombok.Data;
+import lombok.ToString;
 
 @Table(name = "pagos")
 @Data
@@ -36,10 +37,9 @@ public class Pago {
     @Column(name = "codigo_pago")
     private String codigoPago;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_alumno",
-            referencedColumnName = "id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "FK_pago_alumno"))
+    @JoinColumn(name = "id_alumno", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(name = "FK_pago_alumno"))
     private Alumno alumno;
+
 }

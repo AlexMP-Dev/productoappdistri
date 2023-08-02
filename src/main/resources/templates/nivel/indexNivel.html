@@ -1,0 +1,35 @@
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <div class="container">
+        <h2>Lista de Niveles</h2>
+        <div class="mb-3">
+            <th:block th:replace="~{_frag/inputs::btn_agregar(@{/niveles/nuevo},'Agregar Nivel')}" </th:block>
+            </th:block>
+            <th:block th:replace="~{_frag/Inputs::btn_cerrar}"></th:block>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead class="table-dark">
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </thead>
+                <tbody>
+                    <tr th:each="nivel : ${niveles}">
+                        <td th:text="${nivel.id}">ID</td>
+                        <td th:text="${nivel.nombre}">Nombre</td>
+                        <td>
+                            <th:block th:replace="~{_frag/inputs::btn_editar(@{/niveles/editar/}+${nivel.id})}" />
+                        </td>
+                        <td>
+                            <th:block th:replace="~{_frag/inputs::btn_eliminar(@{/niveles/eliminar/}+${nivel.id})}" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>

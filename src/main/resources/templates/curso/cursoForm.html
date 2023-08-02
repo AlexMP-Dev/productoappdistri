@@ -1,0 +1,37 @@
+<html>
+
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+	<header th:replace="~{_frag/Base::site-header}"></header>
+	<article class="container mt-3">
+		<H2>Datos de Curso</H2>
+		<form th:object="${curso}" th:action="@{/cursos/guardar}" method="post">
+
+			<div th:replace="~{_frag/Inputs::iHtml(hidden, 
+				'ID:', ' ', id)}"></div>
+
+			<div th:replace="~{_frag/Inputs::iHtml(text, 
+				'Nombre Curso:', 'Ingrese Nombre', nombre)}"></div>
+
+			<div>
+				<label for="nivel">Nivel</label>
+				<select th:field="*{nivel.id}" id="nivel">
+					<option value="">Selecciona un nivel</option>
+					<option th:each="lstNivel : ${niveles}" th:value="${lstNivel.id}" th:text="${lstNivel.nombre}">
+					</option>
+				</select>
+			</div>
+
+			<div>
+				<block th:replace="~{_frag/Inputs::btn_aceptar}">
+				</block>
+				<block th:replace="~{_frag/Inputs::btn_cancelar(
+					@{/cursos/listar})}">
+				</block>
+			</div>
+		</form>
+	</article>
+</body>
+
+</html>

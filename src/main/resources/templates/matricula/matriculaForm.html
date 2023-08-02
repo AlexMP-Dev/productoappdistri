@@ -1,0 +1,47 @@
+<html>
+
+<head th:replace="~{_frag/Base::site-head}"></head>
+
+<body>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <div class="container">
+        <h2>Formulario de Matricula</h2>
+        <form th:object="${matricula}" th:action="@{/matriculas/guardar}" method="post">
+            <div th:replace="~{_frag/inputs::iHtml(hidden, 'ID:', ' ', id)}"></div>
+            <div th:replace="~{_frag/inputs::iHtml(date, 
+                'Fecha Matricula:', '', fechaMatricula)}"></div>
+            <div>
+                <label for="curso">Curso</label>
+                <select th:field="*{curso}" id="curso">
+                    <option value="">Selecciona un curso</option>
+                    <option th:each="curso : ${cursos}" th:value="${curso.id}"
+                        th:text="${curso.nombre}+' '+${curso.nivel.nombre}">
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label for="pago">Pago</label>
+                <select th:field="*{pago}" id="pago">
+                    <option value="">Selecciona un Pago</option>
+                    <option th:each="lspago : ${pagos}" th:value="${lspago.id}"
+                        th:text="'id:'+${lspago.id}+'    fecha:'+${#calendars.format(lspago.fechaPago, 'yyyy/MM/dd')}+'   monto: S/'+${lspago.monto}">
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label for="periodo">Periodo</label>
+                <select th:field="*{periodo}" id="periodo">
+                    <option value="">Selecciona un Periodo</option>
+                    <option th:each="periodo : ${periodos}" th:value="${periodo.id}" th:text="${periodo.nombre}">
+                    </option>
+                </select>
+            </div>
+            <div>
+                <block th:replace="~{_frag/inputs::btn_aceptar}"></block>
+                <block th:replace="~{_frag/inputs::btn_cancelar(@{/matriculas/listar})}"></block>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
