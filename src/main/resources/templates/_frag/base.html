@@ -102,6 +102,19 @@
 					</li>
 				</ul>
 			</div>
+			<div class="me-auto">
+				<div sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="post" id="logoutForm">
+						<p class="text-white align-middle m-0">
+							<strong sec:authentication="name">Usuario</strong>
+							<small sec:authentication="principal.authorities">Roles</small> |
+							<button type="submit" class="btn btn-link btn-sm text-white p-0">
+								Cerrar Sesión
+							</button>
+						</p>
+					</form>
+				</div>
+			</div>
 		</div>
 	</nav>
 </header>
