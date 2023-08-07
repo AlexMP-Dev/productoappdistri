@@ -39,13 +39,6 @@ public class PagoController {
         return "pago/pagoForm";
     }
 
-    @GetMapping("/nuevoPagoWeb")
-    public String mostrarFormularioNuevoPagoWeb(Model model) {
-        model.addAttribute("pago", new Pago());
-        model.addAttribute("alumnos", alumnoService.findAll()); // Lista de alumnos para el dropdown
-        return "pago/pagoWeb";
-    }
-
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(Model model, 
         @PathVariable("id") Long idPago) {

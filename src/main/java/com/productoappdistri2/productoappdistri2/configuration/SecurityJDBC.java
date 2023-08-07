@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,59 +19,61 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityJDBC {
 
-    @Autowired
-    private DataSource dataSource;
+        @Autowired
+        private DataSource dataSource;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+        @Autowired
+        PasswordEncoder passwordEncoder;
 
-    @Bean
-    UserDetailsService userDetailsService() {
-        JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
+        @Bean
+        UserDetailsService userDetailsService() {
+                JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
 
-        manager.setRolePrefix("ROLE_");
-        manager.setUsersByUsernameQuery(
-                "select nombre as username, "
-                        + "clave as password, estado as enabled "
-                        + "from usuario as users where nombre = ?");
-        manager.setAuthoritiesByUsernameQuery(
-                "select nombre as username, rol as authority "
-                        + "from usuario as authorities where nombre = ?");
+                manager.setRolePrefix("ROLE_");
+                manager.setUsersByUsernameQuery(
+                                "select nombre as username, "
+                                                + "clave as password, estado as enabled "
+                                                + "from usuario as users where nombre = ?");
+                manager.setAuthoritiesByUsernameQuery(
+                                "select nombre as username, rol as authority "
+                                                + "from usuario as authorities where nombre = ?");
 
-        return manager;
-    }
+                return manager;
+        }
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .httpBasic(withDefaults())
-                .authorizeHttpRequests((request) -> request
-                        .requestMatchers("/css/**").permitAll()
-                        .requestMatchers("/images/**").permitAll()
-                        .requestMatchers("/js/**").permitAll()
-                        .requestMatchers("/login").permitAll()
-                        .requestMatchers("/usuario/denegado").permitAll()
-                        .requestMatchers("/usuario/poblar").permitAll()
-                        .requestMatchers("/*/listar").permitAll()
-                        .requestMatchers("/*/nuevo").hasRole("ADMIN")
-                        .requestMatchers("/*/editar/**").hasRole("ADMIN")
-                        .requestMatchers("/*/eliminar/**").hasRole("ADMIN")
-                        .anyRequest().authenticated())
-                .exceptionHandling((exceptionHandling) -> exceptionHandling
-                        .accessDeniedPage("/usuario/denegado"))
-                .formLogin(form -> form
-                        .permitAll()
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                        .loginPage("/usuario/login")
-                        .failureUrl("/usuario/login?error=true")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/", true)
+        @Bean
+        SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                return http
+                                .httpBasic(withDefaults())
+                                .authorizeHttpRequests((request) -> request
+                                                .requestMatchers("/css/**").permitAll()
+                                                .requestMatchers("/images/**").permitAll()
+                                                .requestMatchers("/js/**").permitAll()
+                                                .requestMatchers("/login").permitAll()
+                                                .requestMatchers("/usuario/denegado").permitAll()
+                                                .requestMatchers("/usuario/poblar").permitAll()
+                                                .requestMatchers("/*/listar").permitAll()
+                                                .requestMatchers("/*/nuevo").hasRole("ADMIN")
+                                                .requestMatchers("/*/editar/**").hasRole("ADMIN")
+                                                .requestMatchers("/*/eliminar/**").hasRole("ADMIN")
+                                                .requestMatchers(HttpMethod.POST, "/process_payment").permitAll()
+                                                .anyRequest().authenticated())
+                                .cors(withDefaults())
+                                .exceptionHandling((exceptionHandling) -> exceptionHandling
+                                                .accessDeniedPage("/usuario/denegado"))
+                                .formLogin(form -> form
+                                                .permitAll()
+                                                .usernameParameter("username")
+                                                .passwordParameter("password")
+                                                .loginPage("/usuario/login")
+                                                .failureUrl("/usuario/login?error=true")
+                                                .loginProcessingUrl("/login")
+                                                .defaultSuccessUrl("/", true)
 
-                )
-                .logout((logout) -> logout.permitAll()
-                        .logoutSuccessUrl("/login")
-                        .clearAuthentication(true))
-                .build();
-    }
+                                )
+                                .logout((logout) -> logout.permitAll()
+                                                .logoutSuccessUrl("/login")
+                                                .clearAuthentication(true))
+                                .build();
+        }
 }

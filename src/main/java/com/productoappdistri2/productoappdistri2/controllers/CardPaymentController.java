@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/process_payment")
 public class CardPaymentController {
-    private final CardPaymentService cardPaymentService;
 
     @Autowired
+    private final CardPaymentService cardPaymentService;
+
     public CardPaymentController(CardPaymentService cardPaymentService) {
         this.cardPaymentService = cardPaymentService;
     }

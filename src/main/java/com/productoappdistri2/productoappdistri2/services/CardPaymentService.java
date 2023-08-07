@@ -11,13 +11,13 @@ import com.mercadopago.resources.payment.Payment;
 import com.productoappdistri2.productoappdistri2.dto.CardPaymentDTO;
 import com.productoappdistri2.productoappdistri2.dto.PaymentResponseDTO;
 import com.productoappdistri2.productoappdistri2.exception.MercadoPagoException;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CardPaymentService {
-  
-  private String mercadoPagoAccessToken = "";
+  @Value("TEST-4282377719761445-071614-fc56ae508dd76a879bf09451dacf16ea-1285815286")
+  private String mercadoPagoAccessToken;
 
   public PaymentResponseDTO processPayment(CardPaymentDTO cardPaymentDTO) {
     try {
@@ -25,23 +25,22 @@ public class CardPaymentService {
 
       PaymentClient paymentClient = new PaymentClient();
 
-      PaymentCreateRequest paymentCreateRequest =
-          PaymentCreateRequest.builder()
-              .transactionAmount(cardPaymentDTO.getTransactionAmount())
-              .token(cardPaymentDTO.getToken())
-              .description(cardPaymentDTO.getProductDescription())
-              .installments(cardPaymentDTO.getInstallments())
-              .paymentMethodId(cardPaymentDTO.getPaymentMethodId())
-              .payer(
-                  PaymentPayerRequest.builder()
-                      .email(cardPaymentDTO.getPayer().getEmail())
-                      .identification(
-                          IdentificationRequest.builder()
-                              .type(cardPaymentDTO.getPayer().getIdentification().getType())
-                              .number(cardPaymentDTO.getPayer().getIdentification().getNumber())
-                              .build())
-                      .build())
-              .build();
+      PaymentCreateRequest paymentCreateRequest = PaymentCreateRequest.builder()
+          .transactionAmount(cardPaymentDTO.getTransactionAmount())
+          .token(cardPaymentDTO.getToken())
+          .description(cardPaymentDTO.getProductDescription())
+          .installments(cardPaymentDTO.getInstallments())
+          .paymentMethodId(cardPaymentDTO.getPaymentMethodId())
+          .payer(
+              PaymentPayerRequest.builder()
+                  .email(cardPaymentDTO.getPayer().getEmail())
+                  .identification(
+                      IdentificationRequest.builder()
+                          .type(cardPaymentDTO.getPayer().getIdentification().getType())
+                          .number(cardPaymentDTO.getPayer().getIdentification().getNumber())
+                          .build())
+                  .build())
+          .build();
 
       Payment createdPayment = paymentClient.create(paymentCreateRequest);
 
