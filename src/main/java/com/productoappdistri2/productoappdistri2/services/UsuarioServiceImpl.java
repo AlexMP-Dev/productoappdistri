@@ -3,6 +3,7 @@ package com.productoappdistri2.productoappdistri2.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	public static void main(String[] args) {
+		PasswordEncoder passwordEncoder2 = new BCryptPasswordEncoder();
+		String pass = passwordEncoder2.encode("123456");
+		System.err.println(pass);
+	}
 
 	@Override
 	public List<Usuario> findAll() {
